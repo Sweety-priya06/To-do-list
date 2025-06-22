@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pomodoro Timer</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      background-color: #fff0f6;
+      padding: 40px;
+    }
+
+    h1 {
+      color: #b23a48;
+    }
+
+    .timer {
+      font-size: 5rem;
+      margin: 20px 0;
+    }
+
+    button {
+      font-size: 1.1rem;
+      margin: 5px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #ff90b3;
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    select {
+      font-size: 1rem;
+      padding: 6px 12px;
+      margin-bottom: 20px;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      color: #5a2a5f;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>🍅 Pomodoro Timer</h1>
+  <div>
+    <label for="duration">Choose Duration:</label>
+    <select id="duration">
+      <option value="25">25 min</option>
+      <option value="15">15 min</option>
+      <option value="5">5 min</option>
+    </select>
+  </div>
+  <div class="timer" id="timer">25:00</div>
+  <button onclick="startTimer()">▶️ Start</button>
+  <button onclick="pauseTimer()">⏸️ Pause</button>
+  <button onclick="resetTimer()">🔄 Reset</button>
+
+  <br><a href="index.html">← Back to Planner</a>
+
+  <script>
+    let timerDisplay = document.getElementById('timer');
+    let durationSelect = document.getElementById('duration');
+    let timer;
+    let remainingTime = 1500; // default 25 min
+    let isRunning = false;
+
+    function updateDisplay() {
+      let minutes = Math.floor(remainingTime / 60);
+      let seconds = remainingTime % 60;
+      timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    }
+
+    function startTimer() {
+      if (isRunning) return;
+      isRunning = true;
+      timer = setInterval(() => {
+        if (remainingTime > 0) {
+          remainingTime--;
+          updateDisplay();
+        } else {
+          clearInterval(timer);
+          isRunning = false;
+          alert("⏰ Time's up!");
+        }
+      }, 1000);
+    }
+
+    function pauseTimer() {
+      clearInterval(timer);
+      isRunning = false;
+    }
+
+    function resetTimer() {
+      pauseTimer();
+      const selected = parseInt(durationSelect.value, 10);
+      remainingTime = selected * 60;
+      updateDisplay();
+    }
+
+    durationSelect.addEventListener('change', () => {
+      resetTimer();
+    });
+
+    // Initialize display
+    resetTimer();
+  </script>
+</body>
+</html>

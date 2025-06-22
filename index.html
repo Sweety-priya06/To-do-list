@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="bunny.css">
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Cute To-Do List</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body data-theme="light">
+  <header style="position: relative; background-color: #ffe0eb; padding: 10px 0 6px; border-radius: 0 0 12px 12px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); text-align: center;">
+  <h1 style="margin: 0; font-size: 1.6rem;">📝 My To-Do Planner</h1>
+  <p id="user-welcome" style="margin: 0; font-size:1.45rem; color: #7f5283;"></p>
+  <button id="theme-toggle"
+          style="position: absolute; right: 12px; top: 10px; background: none; border: none; font-size: 1.2rem; cursor: pointer;">
+    🌙
+    
+  </button>
+  
+
+<a href="pomodoro.html" 
+   style="position: absolute; left: 12px; top: 10px; font-size: 1.05rem; text-decoration: none; background-color: #ffc5d9; color: #4a255e; padding: 4px 10px; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.15);">
+   🍅 Pomodoro
+</a>
+<a href="game.html" 
+   style="position: absolute; left: 12px; top: 46px; font-size: 1.05rem; text-decoration: none; background-color: #d1c4e9; color: #4a255e; padding: 4px 10px; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.15);">
+   🎲 Play Game
+</a>
+
+</header>
+
+
+
+
+
+  <main>
+    <section class="form-section">
+      <form id="task-form">
+        <input type="text" id="task-input" placeholder="Add a task..." required>
+        <select id="task-category" required>
+          <option value="">Category</option>
+          <option value="Work">💼 Work</option>
+          <option value="Personal">🏡 Personal</option>
+          <option value="Study">📚 Study</option>
+        </select>
+        <select id="task-priority" required>
+          <option value="">Priority</option>
+          <option value="High">🔥 High</option>
+          <option value="Medium">⏳ Medium</option>
+          <option value="Low">💤 Low</option>
+        </select>
+        <input type="datetime-local" id="reminder-time" required>
+        <button type="submit">➕ Add Task</button>
+      </form>
+    </section>
+
+    <section class="tasks-section">
+      <h2>📅 Today's Tasks</h2>
+      <ul id="today-tasks"></ul>
+
+      <h2>🌤️ Tomorrow's Tasks</h2>
+      <ul id="tomorrow-tasks"></ul>
+
+      <h2>📆 Upcoming Tasks</h2>
+      <ul id="upcoming-tasks"></ul>
+    </section>
+
+    <section class="sticky-board-section">
+  <h2>📌 Sticky Notes Board</h2>
+  <button id="add-sticky-btn">➕ Add Sticky Note</button>
+  <div id="sticky-board" class="sticky-board"></div>
+</section>
+
+    <section class="quote-section">
+      <h2>💡 Quote of the Day</h2>
+      <p id="quote-display"></p>
+    </section>
+
+    <section class="chart-section">
+      <canvas id="productivityChart" width="300" height="300"></canvas>
+    </section>
+    
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+  // Retrieve username from localStorage
+  const userName = localStorage.getItem("userName");
+
+  // If name exists, display welcome message
+  if (userName) {
+    document.getElementById("user-welcome").textContent = `${userName}, Welcome!`;
+  }
+</script>
+
+<script src="bunny.js"></script>
+
+</body>
+</html>
